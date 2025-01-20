@@ -1,4 +1,4 @@
-const { createEvent } = require('../services/Event.services');
+const { createEvent, getEvent } = require('../services/Event.services');
 
 const handleCreateEvent = async (req,res) => {
     try{
@@ -12,6 +12,17 @@ const handleCreateEvent = async (req,res) => {
     }
 }
 
+const handleGetEvent = async (req, res) => {
+    try{
+        const event = await getEvent();
+        res.status(200).json(event)
+    }
+    catch(error){
+        res.status(500).json({ error: error.message });
+    }
+}
+
 module.exports = {
-    handleCreateEvent
+    handleCreateEvent,
+    handleGetEvent
 }

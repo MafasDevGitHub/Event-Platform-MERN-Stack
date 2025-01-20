@@ -11,6 +11,17 @@ const createEvent = async (eventData) => {
     }
 }
 
+const getEvent = async () => {
+    try{
+        return await Event.find().populate('createdBy','username email').populate('attendees','username email');
+    }
+    catch(error){
+        console.error("Error in getEvents service:", error);
+        throw new Error("Could not fetch events");
+    }
+}
+
 module.exports = {
-    createEvent
+    createEvent,
+    getEvent
 }
